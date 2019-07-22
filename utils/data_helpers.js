@@ -27,5 +27,21 @@ module.exports = pgClient => {
         })
         .catch(err => callback(err, null));
     },
+    getTodosByCategory: (category_id, callback) => {
+      const query = {
+        text:
+          'SELECT * FROM categories INNER JOIN todos ON categories.id = todos.category_id WHERE categories.id = $1',
+        values: [category_id],
+      };
+
+      pgClient
+        .query(query)
+        .then(data => {
+          callback(null, data.rows);
+        })
+        .catch(err => {
+          callback(err, null);
+        });
+    },
   };
 };
