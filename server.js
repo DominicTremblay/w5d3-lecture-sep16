@@ -23,8 +23,9 @@ const pgClient = new Client(connectionOptions);
 pgClient
   .connect()
   .then(() => {
+    const DataHelpers = require('./utils/data_helpers')(pgClient);
     console.log(`Connected to ${pgClient.database} Database`);
-    app.use('/todos', todosRoutes(pgClient));
+    app.use('/todos', todosRoutes(DataHelpers));
   })
   .catch(err => console.error('connection error', err.stack));
 
