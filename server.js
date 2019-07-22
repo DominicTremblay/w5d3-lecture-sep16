@@ -1,12 +1,14 @@
 const express = require('express');
 const { Client } = require('pg');
+const bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 const app = express();
 const todosRoutes = require('./routes/todos');
 
 require('dotenv').config();
 
-app.use(express.bodyParser());
+// parse application/json
+app.use(bodyParser.json());
 
 const connectionOptions = {
   host: process.env.PGHOST,
