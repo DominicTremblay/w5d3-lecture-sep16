@@ -6,6 +6,8 @@ const todosRoutes = require('./routes/todos');
 
 require('dotenv').config();
 
+app.use(express.bodyParser());
+
 const connectionOptions = {
   host: process.env.PGHOST,
   database: process.env.PGDATABASE,
